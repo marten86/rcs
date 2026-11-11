@@ -41,7 +41,7 @@
     f.src = URL_APP;
     f.title = 'Ramadhan Control System';
     f.allow = 'clipboard-write';
-    f.onload = function () { document.getElementById('muat').style.display = 'none'; };
+    f.onload = function () { setTimeout(function () { document.getElementById('muat').style.display = 'none'; }, 3000); };
     document.body.appendChild(f);
   }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Ramadhan Control System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f6b45">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="RCS 1448">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+  html, body { margin: 0; height: 100%; background: #f4f6f3; overflow: hidden; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  #muat, #offline { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; background: #f4f6f3; color: #1d2a22; font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-align: center; padding: 24px; }
+  #muat img, #offline img { width: 84px; height: 84px; border-radius: 18px; }
+  #muat small { color: #5d6b62; }
+  #offline { display: none; z-index: 2; }
+  #offline button { padding: 12px 22px; font-size: 16px; font-weight: 600; border: 0; border-radius: 10px; background: #1f6b45; color: #fff; }
+</style>
+</head>
+<body>
+<div id="muat"><img src="icon-192.png" alt=""><b>Ramadhan Control System</b><small>Memuat…</small></div>
+<div id="offline"><img src="icon-192.png" alt=""><b>Tidak ada koneksi internet</b><small>Data RCS butuh internet. Periksa sinyal lalu coba lagi.</small>
+  <button onclick="location.reload()">Coba lagi</button></div>
+<script>
+  // GANTI dengan URL /exec deployment web app RCS
+  var URL_APP = 'https://script.google.com/macros/s/AKfycby-20RMNzBnVW-7t-zU2IMVpx9YS4jeWtczUyvOTs0DgxN5lFgA-MzZ8AnsEBG3NMCE/exec';
+
+  function cekKoneksi() { document.getElementById('offline').style.display = navigator.onLine ? 'none' : 'flex'; }
+  window.addEventListener('online', function () { location.reload(); });
+  window.addEventListener('offline', cekKoneksi);
+  cekKoneksi();
+
+  if (navigator.onLine) {
+    var f = document.createElement('iframe');
+    f.src = URL_APP;
+    f.title = 'Ramadhan Control System';
+    f.allow = 'clipboard-write';
+    f.onload = function () { document.getElementById('muat').style.display = 'none'; };
+    document.body.appendChild(f);
+  }
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>

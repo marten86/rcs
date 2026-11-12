@@ -1,6 +1,6 @@
 // Service worker RCS: menyimpan cangkang (bukan data) supaya aplikasi cepat terbuka.
 // Naikkan VERSI setiap kali file cangkang diubah.
-var VERSI = 'rcs-v1';
+var VERSI = 'rcs-v2';
 var CANGKANG = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', function (e) {
